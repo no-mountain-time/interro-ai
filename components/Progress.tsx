@@ -5,7 +5,7 @@ const steps = [
   { name: 'Step 4', href: '#', status: 'upcoming' },
 ]
 
-export default function Example() {
+export default function Progress() {
   return (
     <nav className='flex items-center justify-center' aria-label='Progress'>
       <p className='text-sm font-medium'>
