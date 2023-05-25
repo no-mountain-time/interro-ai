@@ -1,9 +1,33 @@
 const people = [
   {
-    name: 'Michael Foster',
-    role: 'Co-Founder / CTO',
+    name: 'Mason Shelton',
+    role: 'Full Stack Software Engineer',
     imageUrl:
-      'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+      'https://ca.slack-edge.com/T03KRTTF96K-U03UD4JDXKR-1644a570648e-512',
+  },
+  {
+    name: 'Felix Leclerc Jr.',
+    role: 'Full Stack Software Engineer',
+    imageUrl:
+      'https://ca.slack-edge.com/T03KRTTF96K-U03QVAUPSH5-5116ef375209-512',
+  },
+  {
+    name: 'Andrew Luu',
+    role: 'Full Stack Software Engineer',
+    imageUrl:
+      'https://ca.slack-edge.com/T03KRTTF96K-U03U8EQF6TY-672a22db984b-512',
+  },
+  {
+    name: 'Jake Gray',
+    role: 'Full Stack Software Engineer',
+    imageUrl:
+      'https://ca.slack-edge.com/T03KRTTF96K-U040FP8DRLY-b8d2bfbf8c1a-512',
+  },
+  {
+    name: 'Jason Johnson',
+    role: 'Full Stack Software Engineer',
+    imageUrl:
+      'https://ca.slack-edge.com/T03KRTTF96K-U041HSQ08QL-6773071adc0a-512',
   },
   // More people...
 ]
