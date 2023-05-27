@@ -31,7 +31,7 @@ export default function Features() {
             Powered by AI and our proprietary dataset.
           </h2>
           <p className='mt-6 text-lg leading-8 text-gray-300'>
-            Interrro-AI leverages AI to provide a custom tailored interview experience for you and combined with our proprietary evergreen dataset, you can be assured that you are getting the most relevant questions today and actionable feedback.
+            Interrro-AI leverages AI to provide a custom tailored interview experience for you. Combined with our proprietary evergreen dataset, you can be assured that you are getting the most relevant questions today and actionable feedback.
           </p>
         </div>
         <div className='mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none'>
