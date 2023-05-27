@@ -9,7 +9,7 @@ export default function Questions() {
     <>
       <h1>Questions Start here:</h1>
       <Progress />
-      <div className='w-[60%] h-fit mx-auto rounded-lg bg-white mb-10'>
+      <div className='w-[60%] h-fit mx-auto rounded-lg bg-white mb-10 p-2 md:p-16'>
         <p className='text-black'>Question</p>
         <Input />
         <Response />
