@@ -9,10 +9,6 @@ export default async function handler(
  
   try {
     
-    // await client.sql`CREATE TABLE );`;
-    // const names = ['Fiona', 'Lucy'];
-    // await client.sql`INSERT INTO Pets (Name, Owner) VALUES (${names[0]}, ${names[1]});`;
-
     const questions = await client.sql`SELECT 
     questions.id,
     questions.text,
