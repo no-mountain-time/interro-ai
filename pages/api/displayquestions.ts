@@ -22,7 +22,7 @@ export default async function handler(
   questions.difficulty_level,
   questions.time_allotted,
   topics.name AS topic_name,
-  users_answers.grade
+  users_answers.grade AS user_grade,
 FROM 
   questions
 INNER JOIN 
