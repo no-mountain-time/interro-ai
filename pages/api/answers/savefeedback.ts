@@ -8,9 +8,13 @@ export default async function handler(
   const client = await db.connect();
  
   try {
-    const { answer_id, feedback, grade} = request.body
+    const { answerId, feedback, grade} = request.body;
 
-    await client.sql`INSERT INTO user_answers WHERE answer_id = ${answer_id} VALUES (feedback, grade)`;
+    await client.query(`
+    UPDATE users_answers 
+    SET feedback = $2, grade = $3
+    WHERE answer_id = $1
+  `, [answerId, feedback, grade]);
     return response.status(200).json('feedback saved');
 
   } catch (error) {
