@@ -17,17 +17,20 @@ export default async function handler(
   }
  
   const questions = await client.sql`SELECT 
-    questions.id,
-    questions.text,
-    questions.difficulty_level,
-    questions.time_allotted,
-    topics.name AS topic_name
+  questions.id,
+  questions.text,
+  questions.difficulty_level,
+  questions.time_allotted,
+  topics.name AS topic_name,
+  users_answers.grade
 FROM 
-    questions
+  questions
 INNER JOIN 
-    question_topics ON questions.id = question_topics.question_id
+  question_topics ON questions.id = question_topics.question_id
 INNER JOIN 
-    topics ON question_topics.topic_id = topics.id;
+  topics ON question_topics.topic_id = topics.id
+LEFT JOIN
+  users_answers ON questions.id = users_answers.question_id;
 `;
   return response.status(200).json({ questions });
 }
