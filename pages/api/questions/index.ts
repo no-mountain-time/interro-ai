@@ -1,6 +1,6 @@
 import { db, QueryResultRow } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
-
+//done?
 type Question = {
   id: number;
   text: string;
@@ -19,7 +19,7 @@ export default async function handler(
   response: NextApiResponse<Questions>,
 ) {
   const client = await db.connect();
-  
+
   try {
     const questions = await client.query(`
       SELECT 

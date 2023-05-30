@@ -1,6 +1,6 @@
 import { db } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
- 
+ //needs types and query
 export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse,

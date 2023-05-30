@@ -1,7 +1,6 @@
 import { db } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-
+// needs types, query done
  
 export default async function handler(
   request: NextApiRequest,
@@ -11,10 +10,9 @@ export default async function handler(
  
   try {
     const { userId, questionId, answer } = request.body;
-
     
     await client.sql`INSERT INTO users_answers (user_id, question_id, answer) VALUES ($1, $2, $3)`, [userId, questionId, answer];
-    return response.status(200).json('added successfuly');
+    return response.status(200).json('Answer saved successfully.');
 
   } catch (error) {
     return response.status(500).json({ error });

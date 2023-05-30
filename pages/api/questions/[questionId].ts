@@ -1,6 +1,6 @@
 import { db, QueryResultRow } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
-
+//done?
 type Question = {
   id: number;
   text: string;
