@@ -1,6 +1,8 @@
 import { db, QueryResultRow } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
-//need query and types
+import { authOptions } from "../../auth/[...nextauth]"
+import { getServerSession } from "next-auth/next"
+
 type History = {
   id: number,
   answer: string,
@@ -16,8 +18,10 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse<Histories>,
 ) {
+  const session = await getServerSession(request, response, authOptions)
+  //@ts-expect-error
+  if (!session) return response.send('Answer may not be saved since the user is not signed in.')
   const client = await db.connect();
-
   const questionId = Array.isArray(request.query.questionId) ? request.query.questionId[0] : request.query.questionId
   const { userId } = request.body;
 
