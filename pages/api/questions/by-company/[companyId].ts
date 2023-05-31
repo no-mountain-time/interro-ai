@@ -1,8 +1,6 @@
 import { db, QueryResultRow } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-//Access all questions and a users' grade for every question
-
+//needs types and query
 type Question = {
   id: number;
   text: string;
@@ -12,18 +10,16 @@ type Question = {
   user_grade: string | null;
 }
 
-type Questions = {
-  questions: Question[];
-}
-
 export default async function handler(
   request: NextApiRequest,
-  response: NextApiResponse<Questions>,
+  response: NextApiResponse<Question>,
 ) {
   const client = await db.connect();
 
+  const { questionId } = request.query;
+
   try {
-    const questions = await client.query(`
+    const result = await client.query(`
       SELECT 
         questions.id,
         questions.text,
@@ -38,24 +34,30 @@ export default async function handler(
       INNER JOIN 
         topics ON question_topics.topic_id = topics.id
       LEFT JOIN
-        users_answers ON questions.id = users_answers.question_id;
-    `);
+        users_answers ON questions.id = users_answers.question_id
+      WHERE 
+        questions.id = $1
+    `, [questionId]);
 
-    const formattedQuestions = questions.rows.map(row => {
-      return {
-        id: row.id,
-        text: row.text,
-        difficulty_level: row.difficulty_level,
-        time_allotted: row.time_allotted,
-        topic_name: row.topic_name,
-        user_grade: row.user_grade ? row.user_grade : null
-      };
-    });
+    if (result.rows.length === 0) {
+      //@ts-expect-error
+      return response.status(404).json({ message: "Question not found" });
+    }
 
-    return response.status(200).json({ questions: formattedQuestions });
+    const row = result.rows[0];
+    const question = {
+      id: row.id,
+      text: row.text,
+      difficulty_level: row.difficulty_level,
+      time_allotted: row.time_allotted,
+      topic_name: row.topic_name,
+      user_grade: row.user_grade
+    };
+
+    return response.status(200).json(question);
 
   } catch (error) {
     //@ts-expect-error
-    return response.status(500).json({ error });
+    return response.status(500).json({ error: error.message });
   }
 }

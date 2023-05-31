@@ -1,8 +1,6 @@
 import { db, QueryResultRow } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
-
-//Access all questions and a users' grade for every question
-
+//need types and query
 type Question = {
   id: number;
   text: string;
