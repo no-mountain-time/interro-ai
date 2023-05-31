@@ -1,13 +1,18 @@
 import Button from '@/components/Button'
 import { BsPlayFill } from 'react-icons/bs'
 import InputSubject from '@/components/InputSubject'
+import { useRef } from 'react'
 
-const handleInterviewStart = (e: any) => {
-  e.preventDefault()
-  console.log('Interview started')
-}
 
 export default function Interview() {
+  const companyRef = useRef<HTMLInputElement>(null)
+
+  const handleInterviewStart = (e: any) => {
+    e.preventDefault()
+    console.log('Interview started')
+    console.log(companyRef.current?.value)
+  }
+
   return (
     <div className='mx-auto w-[70%] max-w-7xl p-2 rounded-lg bg-white'>
       <p className='text-slate-800 text-center mb-4 text-xl'>
@@ -37,6 +42,7 @@ export default function Interview() {
                   type='text'
                   name='company'
                   id='company'
+                  ref={companyRef}
                   className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   placeholder='Twitter, Google, etc.'
                 />
