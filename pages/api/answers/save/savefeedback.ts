@@ -1,5 +1,7 @@
 import { db } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { authOptions } from "../../auth/[...nextauth]"
+import { getServerSession } from "next-auth/next"
 //done?
 export default async function handler(
   request: NextApiRequest,
@@ -9,6 +11,12 @@ export default async function handler(
  
   try {
     const { answerId, feedback, grade} = request.body;
+
+    const session = await getServerSession(request, response, authOptions)
+    if (!session) return response.send('Answer may not be saved since the user is not signed in.')
+
+    if (answerId === null || answerId === undefined) return response.status(400).json('Answer was not saved. Feedback could not be saved.')
+
 
     await client.sql`
     UPDATE users_answers 
