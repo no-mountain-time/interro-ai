@@ -12,16 +12,20 @@ type Question = {
   user_grade: string | null;
 }
 
+type Questions = {
+  questions: Question[];
+}
+
 export default async function handler(
   request: NextApiRequest,
-  response: NextApiResponse<Question>,
+  response: NextApiResponse<Questions>,
 ) {
   const client = await db.connect();
 
   const topicId = Array.isArray(request.query.topicId) ? request.query.topicId[0] : request.query.topicId;
 
   try {
-    const result = await client.sql`
+    const questions = await client.sql`
       SELECT 
         questions.id,
         questions.text,
@@ -41,22 +45,18 @@ export default async function handler(
         topics.id = ${topicId};
     `
 
-    if (result.rows.length === 0) {
-      //@ts-expect-error
-      return response.status(404).json({ message: "Question not found" });
-    }
+    const formattedQuestions = questions.rows.map(row => {
+      return {
+        id: row.id,
+        text: row.text,
+        difficulty_level: row.difficulty_level,
+        time_allotted: row.time_allotted,
+        topic_name: row.topic_name,
+        user_grade: row.user_grade ? row.user_grade : null
+      };
+    });
 
-    const row = result.rows[0];
-    const question = {
-      id: row.id,
-      text: row.text,
-      difficulty_level: row.difficulty_level,
-      time_allotted: row.time_allotted,
-      topic_name: row.topic_name,
-      user_grade: row.user_grade
-    };
-
-    return response.status(200).json(question);
+    return response.status(200).json({ questions: formattedQuestions });
 
   } catch (error) {
     //@ts-expect-error

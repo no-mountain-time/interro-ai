@@ -10,16 +10,20 @@ type Question = {
   user_grade: string | null;
 }
 
+type Questions = {
+  questions: Question[];
+}
+
 export default async function handler(
   request: NextApiRequest,
-  response: NextApiResponse<Question>,
+  response: NextApiResponse<Questions>,
 ) {
   const client = await db.connect();
 
-  const { questionId } = request.query;
+  const companyId = Array.isArray(request.query.companyId) ? request.query.companyId[0] : request.query.companyId;
 
   try {
-    const result = await client.query(`
+    const questions = await client.sql`
       SELECT 
         questions.id,
         questions.text,
@@ -36,25 +40,21 @@ export default async function handler(
       LEFT JOIN
         users_answers ON questions.id = users_answers.question_id
       WHERE 
-        questions.id = $1
-    `, [questionId]);
+        companies.id = ${companyId};
+    `;
 
-    if (result.rows.length === 0) {
-      //@ts-expect-error
-      return response.status(404).json({ message: "Question not found" });
-    }
+    const formattedQuestions = questions.rows.map(row => {
+      return {
+        id: row.id,
+        text: row.text,
+        difficulty_level: row.difficulty_level,
+        time_allotted: row.time_allotted,
+        topic_name: row.topic_name,
+        user_grade: row.user_grade ? row.user_grade : null
+      };
+    });
 
-    const row = result.rows[0];
-    const question = {
-      id: row.id,
-      text: row.text,
-      difficulty_level: row.difficulty_level,
-      time_allotted: row.time_allotted,
-      topic_name: row.topic_name,
-      user_grade: row.user_grade
-    };
-
-    return response.status(200).json(question);
+    return response.status(200).json({ questions: formattedQuestions });
 
   } catch (error) {
     //@ts-expect-error
