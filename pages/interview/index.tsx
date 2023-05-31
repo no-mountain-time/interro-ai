@@ -1,6 +1,11 @@
 import Button from '@/components/Button'
-import {BsPlayFill} from 'react-icons/bs'
+import { BsPlayFill } from 'react-icons/bs'
 import InputSubject from '@/components/InputSubject'
+
+const handleInterviewStart = (e: any) => {
+  e.preventDefault()
+  console.log('Interview started')
+}
 
 export default function Interview() {
   return (
@@ -23,7 +28,6 @@ export default function Interview() {
         </div>
         {/* end divider */}
 
-
         <div className='w-1/3'>
           <p className='text-slate-800 text-center'>Select a company</p>
           <div>
@@ -42,10 +46,12 @@ export default function Interview() {
         </div>
       </div>
       <div className='p-2 float-right mt-4'>
-        <Button>
-          <BsPlayFill className='inline-block mr-2' />
+        <Button
+          onClick={handleInterviewStart}
+          icon={<BsPlayFill className='inline-block mr-2' />}
+        >
           Start
-          </Button>
+        </Button>
       </div>
     </div>
   )
