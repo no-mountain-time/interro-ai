@@ -1,6 +1,8 @@
 import { db, QueryResultRow } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
-//done?
+
+//Retrieve questions by topicID
+
 type Question = {
   id: number;
   text: string;
@@ -16,12 +18,7 @@ export default async function handler(
 ) {
   const client = await db.connect();
 
-  const questionId = Array.isArray(request.query.questionId) ? request.query.questionId[0] : request.query.questionId;
-  
-  if (typeof questionId === 'undefined') {
-    //@ts-expect-error
-    return response.status(400).json({ message: 'Bad request.' });
-  }
+  const topicId = Array.isArray(request.query.topicId) ? request.query.topicId[0] : request.query.topicId;
 
   try {
     const result = await client.sql`
@@ -41,7 +38,8 @@ export default async function handler(
       LEFT JOIN
         users_answers ON questions.id = users_answers.question_id
       WHERE 
-        questions.id = ${questionId};`
+        topics.id = ${topicId};
+    `
 
     if (result.rows.length === 0) {
       //@ts-expect-error
