@@ -1,4 +1,4 @@
-import { StarIcon } from '@heroicons/react/20/solid'
+
 
 const interviews = [
   {
@@ -44,8 +44,8 @@ function classNames(...classes: any) {
 export default function Ratings() {
   return (
     <div className='bg-white w-[87%] mx-auto rounded-lg my-10'>
-      <div className='mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8'>
-        <h2 className='text-lg font-medium text-gray-900'>Interviews</h2>
+      <div className='mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8'>
+        <h2 className='text-lg font-medium text-gray-900'>Interview Performance</h2>
         <div className='mt-6 space-y-10 divide-y divide-gray-200 border-b border-t border-gray-200 pb-10'>
           {interviews.map((review) => (
             <div
@@ -53,24 +53,10 @@ export default function Ratings() {
               className='pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8'
             >
               <div className='lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8'>
+               
                 <div className='flex items-center xl:col-span-1'>
-                  <div className='flex items-center'>
-                    {[0, 1, 2, 3, 4].map((rating) => (
-                      <StarIcon
-                        key={rating}
-                        className={classNames(
-                          review.rating > rating
-                            ? 'text-yellow-400'
-                            : 'text-gray-200',
-                          'h-5 w-5 flex-shrink-0'
-                        )}
-                        aria-hidden='true'
-                      />
-                    ))}
-                  </div>
                   <p className='ml-3 text-sm text-gray-700'>
                     {review.rating}
-                    <span className='sr-only'> out of 5 stars</span>
                   </p>
                 </div>
 
