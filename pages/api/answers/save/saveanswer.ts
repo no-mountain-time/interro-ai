@@ -1,5 +1,7 @@
 import { db } from '@vercel/postgres';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { authOptions } from "../../auth/[...nextauth]"
+import { getServerSession } from "next-auth/next"
 
 type ResponseType = {
   message: string;
@@ -13,7 +15,12 @@ export default async function handler(
   const client = await db.connect();
  
   try {
+    const session = await getServerSession(request, response, authOptions)
+    //@ts-expect-error
+    if (!session) return response.send('Answer may not be saved since the user is not signed in.')
     const { userId, questionId, answer } = request.body;
+
+
     
     const result = await client.sql`
       INSERT INTO users_answers (user_id, question_id, answer) 
