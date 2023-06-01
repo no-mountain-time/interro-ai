@@ -2,7 +2,12 @@ import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/24/outline'
 
-export default function Modal() {
+type ModalProps = {
+  id: number
+} 
+
+
+export default function Modal({id}: ModalProps) {
   const [open, setOpen] = useState(true)
 
   return (
@@ -44,7 +49,7 @@ export default function Modal() {
                       as='h3'
                       className='text-base font-semibold leading-6 text-gray-900'
                     >
-                      Payment successful
+                     {id}
                     </Dialog.Title>
                     <div className='mt-2'>
                       <p className='text-sm text-gray-500'>

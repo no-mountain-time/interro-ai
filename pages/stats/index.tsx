@@ -1,7 +1,7 @@
 import Modal from '@/components/Modal'
 import Button from '@/components/Button'
 import { RiFilePaper2Line } from 'react-icons/ri'
-import { use, useState } from 'react'
+import { useRef, useState } from 'react'
 
 const interviews = [
   {
@@ -43,6 +43,8 @@ const interviews = [
 export default function Stats() {
   const [modal, setModal] = useState(false)
 
+const [idClicked, setIdClicked] = useState<number>(0)
+
 const handleInterviewReview = (e: any, id:number) => {
 
   
@@ -55,7 +57,7 @@ const handleInterviewReview = (e: any, id:number) => {
 
   return (
     <>
-      {modal && (<Modal />)}
+      {modal && (<Modal id={idClicked}/>)}
       <div className='bg-white w-[87%] mx-auto rounded-lg my-10'>
         <div className='mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8'>
           <h2 className='text-lg font-medium text-gray-900'>
