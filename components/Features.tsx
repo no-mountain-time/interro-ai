@@ -1,26 +1,24 @@
+import { BookOpenIcon } from '@heroicons/react/20/solid'
 import { InboxIcon, TrashIcon, UsersIcon } from '@heroicons/react/24/outline'
 
 const features = [
   {
-    name: 'Unlimited inboxes',
+    name: 'Customize questions',
     description:
-      'Non quo aperiam repellendus quas est est. Eos aut dolore aut ut sit nesciunt. Ex tempora quia. Sit nobis consequatur dolores incidunt.',
-    href: '#',
+      'Tailor your interview questions towards specific tech, companies, or even both.',
     icon: InboxIcon,
   },
   {
-    name: 'Manage team members',
+    name: 'Instant grading and feedback',
     description:
-      'Vero eum voluptatem aliquid nostrum voluptatem. Vitae esse natus. Earum nihil deserunt eos quasi cupiditate. A inventore et molestiae natus.',
-    href: '#',
+      'Receive instant feedback on how you did and how you can improve.',
     icon: UsersIcon,
   },
   {
-    name: 'Spam report',
+    name: 'Review performance',
     description:
-      'Et quod quaerat dolorem quaerat architecto aliquam accusantium. Ex adipisci et doloremque autem quia quam. Quis eos molestiae at iure impedit.',
-    href: '#',
-    icon: TrashIcon,
+      'Review all your past questions and answers in your own personal dashboard',
+    icon: BookOpenIcon,
   },
 ]
 
@@ -30,11 +28,10 @@ export default function Features() {
       <div className='mx-auto max-w-7xl px-6 lg:px-8'>
         <div className='mx-auto max-w-2xl lg:mx-0'>
           <h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl'>
-            Stay on top of customer support
+            Powered by AI and our proprietary dataset.
           </h2>
           <p className='mt-6 text-lg leading-8 text-gray-300'>
-            Lorem ipsum dolor sit amet consect adipisicing elit. Possimus magnam
-            voluptatum cupiditate veritatis in accusamus quisquam.
+            Interrro-AI leverages AI to provide a custom tailored interview experience for you. Combined with our proprietary evergreen dataset, you can be assured that you are getting the most relevant questions today and actionable feedback.
           </p>
         </div>
         <div className='mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none'>
@@ -53,12 +50,6 @@ export default function Features() {
                 <dd className='mt-1 flex flex-auto flex-col text-base leading-7 text-gray-300'>
                   <p className='flex-auto'>{feature.description}</p>
                   <p className='mt-6'>
-                    <a
-                      href={feature.href}
-                      className='text-sm font-semibold leading-6 text-indigo-400'
-                    >
-                      Learn more <span aria-hidden='true'>→</span>
-                    </a>
                   </p>
                 </dd>
               </div>
