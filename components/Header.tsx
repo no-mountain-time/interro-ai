@@ -1,12 +1,14 @@
-import { Disclosure } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import Link from 'next/link'
+import { Disclosure } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+import { useSession, signIn, signOut } from 'next-auth/react';
 
-function classNames(...classes:any) {
-  return classes.filter(Boolean).join(' ')
+function classNames(...classes: any) {
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Header() {
+  const { data: session } = useSession();
   return (
     <Disclosure as='nav' className='bg-gray-800'>
       {({ open }) => (
@@ -55,17 +57,10 @@ export default function Header() {
                           Performance
                         </Link>
                         <Link
-                          href='/'
+                          href='/login'
                           className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
                         >
-                          SignIn/Register
-                        </Link>
-
-                        <Link
-                          href='/'
-                          className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                        >
-                          Sign Out
+                          {!session ? 'SignIn / Register' : 'logout'}
                         </Link>
                       </div>
                     </div>
@@ -95,5 +90,5 @@ export default function Header() {
         </>
       )}
     </Disclosure>
-  )
+  );
 }
