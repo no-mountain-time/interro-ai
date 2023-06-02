@@ -10,10 +10,11 @@ export default function Questions() {
       <div className='w-[60%] h-fit mx-auto rounded-lg bg-white mb-10 p-2 md:p-16'>
         <Input />
         <Response />
-        <div className='float-right mt-3'>
-          <Button />
+        <div className='float-right mt-2'>
+          <Button>
+            Submit
+          </Button>
         </div>
-   
       </div>
 
       {/* Modal when complete */}
