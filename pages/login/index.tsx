@@ -3,6 +3,7 @@ import { useSession, signIn, signOut } from 'next-auth/react';
 type Props = {};
 
 const Login = (props: Props) => {
+  const { data: session } = useSession();
   return (
     <button
       onClick={() => {

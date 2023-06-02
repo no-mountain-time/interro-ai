@@ -64,7 +64,7 @@ export default function Header() {
                             Sign in/Register
                           </Link>
                         ) : (
-                          <button>logout</button>
+                          <button onClick={() => signOut()}>logout</button>
                         )}
                       </div>
                     </div>
