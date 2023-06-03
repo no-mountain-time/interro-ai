@@ -2,9 +2,13 @@ import Button from '@/components/Button'
 import { BsPlayFill } from 'react-icons/bs'
 import { useRef } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 
 export default function Interview() {
+
+  const router = useRouter()
+
   const topic1Ref = useRef<HTMLInputElement>(null)
   const topic2Ref = useRef<HTMLInputElement>(null)
   const topic3Ref = useRef<HTMLInputElement>(null)
@@ -35,6 +39,7 @@ export default function Interview() {
       console.log(err)
     })
 
+     router.push('/interview/questions')
   }
 
   return (
