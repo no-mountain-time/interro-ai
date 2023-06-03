@@ -11,7 +11,7 @@ let completion: any = null
 const openai = new OpenAIApi(configuration)
 
 
-export const runPrompt = async ( subjects: any, transcript?: any) => {
+export const runPrompt = async ( transcript: any, subjects?: any) => {
   //if there is no transcript then the interview just started. So send the first question and ans as separate variables
   console.log('SUBJECTS', subjects);
   let topic1 = subjects[0]
@@ -19,7 +19,7 @@ export const runPrompt = async ( subjects: any, transcript?: any) => {
   let topic3 = subjects[2]
   console.log('is topics split?', topic1);
   let completion;
-  if (transcript === undefined) {
+  if (subjects) {
     console.log('NO TRANSCRIPT GPT')
     completion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',

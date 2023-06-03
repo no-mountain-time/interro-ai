@@ -18,12 +18,12 @@ export default async function handler(
     let { transcript, topics, answer } = request.body
     console.log('transcript in req body', transcript)
     let gptOutput;
-    if (transcript.length === 0 || transcript === null) {
+    if (topics || topics.length === 0) {
         console.log('NO TRANSCRIPT');
-        gptOutput = await runPrompt(topics);
+        gptOutput = await runPrompt(transcript, topics);
     } else {
         console.log('TRANSCRIPT')
-        gptOutput = await runPrompt(topics, transcript);
+        gptOutput = await runPrompt(transcript);
     }
     console.log('BACKEND OUTPUT', gptOutput)
     // transcript.push({

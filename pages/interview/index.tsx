@@ -35,11 +35,13 @@ export default function Interview() {
       transcript: [],
     }).then((res) => {
       console.log(res)
+      const value = res.data
+      router.push({pathname: '/interview/questions',
+      query: {key: value}
+    })
     }).catch((err) => {
       console.log(err)
     })
-
-     router.push('/interview/questions')
   }
 
   return (
