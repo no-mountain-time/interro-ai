@@ -16,6 +16,8 @@ export default function Questions() {
 let transcript: Transcript = []
 
 const [answer, setAnswer] = useState('')
+const [feedbackReceived, setfeedbackReceived] = useState(false);
+const [nextQuestion, setNextQuestion] = useState('');
 
   const router = useRouter()
   const { key } = router.query
@@ -35,7 +37,14 @@ const [answer, setAnswer] = useState('')
 
     }).then((res:any) =>{
       console.log(res.data)
-      router.query.key = res.data
+      const feedback = res.data
+      transcript.push({
+        role: 'system',
+        content: feedback,
+      })
+      setfeedbackReceived(true);
+      router.query.key = undefined
+      setNextQuestion(res.data)
     }).catch((err:any) =>{
       console.log(err)
     })
@@ -56,9 +65,7 @@ const [answer, setAnswer] = useState('')
   return (
     <>
       <div className='w-[60%] h-fit mx-auto rounded-lg bg-white mb-10 p-2 md:p-16'>
-        <Input text={key} />
-        
-        
+        <Input text={key || nextQuestion} />
  <div>
       <label
         htmlFor='comment'
@@ -80,7 +87,6 @@ const [answer, setAnswer] = useState('')
       </div>
     </div>
 
-
         <div className='float-right mt-2'>
           <Button
             onClick={responseSubmit}
@@ -90,7 +96,10 @@ const [answer, setAnswer] = useState('')
         </div>
       </div>
 
-      {/* Modal when complete */}
+      {feedbackReceived && <div> 
+      </div>}
+
+
     </>
   )
 }
