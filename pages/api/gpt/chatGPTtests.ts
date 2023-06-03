@@ -6,47 +6,43 @@ const configuration = new Configuration({
   apiKey: process.env.OPEN_AI_API_KEY,
 })
 
-const arrayOfQuestions = [
-  'What is a recent technical challenge you experienced and how did you solve it?',
-  'Say your company gives you one week you can use to improve your and your colleagues lifes: how would you use that week?',
-  'What is the most challenging aspect of your current project?',
-]
-
-const arrayOfAnswers = [
-  'Recently I encountered a problem when trying to send data from the frontend of my application to the back. The problem had to do with the format in which the data was sent and not being able to correctly parse it. I solved this by creating my own parsing alogrithm that was able to correctly traverse the data',
-  'I would ask all of my colleagues for suggestions and make a list for everyone to vote on. After taking in the votes we could make a plan on what options would be the most actionable.',
-  'The most challenging aspect of my current project is trying to account for edge cases that may come back to hurt us in the future. By doing so we are building out a more robust and easier to expand application'
-
-]
-
-const sets = [{gpt: "", user: ""}, {gpt: "", user: ""}]
+let completion: any = null
 
 const openai = new OpenAIApi(configuration)
-const int_topic = 'What excites or interests you about coding?'
-const int_answer =
-  'Being able to create anything I want, I also love working with computers'
-// let transcript =
-//   "Recruiter: Hello, thanks for joining me today for the interview. Can you tell me about your experience with Node.js development? Interviewee: I have been building node application for like 10 years. Recruiter: That's impressive. Can you share with me some of your notable projects that you’ve built using Node.js? Inteviewee: I build the backend of facebook Recruiter: Wow, building the backend of Facebook is definitely impressive. What kind of challenges did you face while building it, and how did you overcome them? Interviewee: The hardest thing was trying to scale to 2 billion users, I don't want to get into it though"
-// let indexOfQandA = 0
-let transcript = ''
 
-const runPrompt = async () => {
+
+export const runPrompt = async ( subjects: any, transcript?: any) => {
   //if there is no transcript then the interview just started. So send the first question and ans as separate variables
-  if (transcript === '') {
-    const completion = await openai.createChatCompletion({
+  console.log('SUBJECTS', subjects);
+  let topic1 = subjects[0]
+  let topic2 = subjects[1]
+  let topic3 = subjects[2]
+  console.log('is topics split?', topic1);
+  let completion;
+  if (transcript === undefined) {
+    console.log('NO TRANSCRIPT GPT')
+    completion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
       messages: [
         {
           role: 'system',
-          content: `You are a technical recruiter working at a company that is hiring a software engineer. You are conducting an interview and choose one of the following questions to ask on react. Respond to the answer while giving feedback and an overall grade out of 100. Make sure to grade the answer harshly.`,
+          content: `You are a technical recruiter working at a company that is hiring a software engineer. You are conducting a technical interview. Ask a question about any of these three topics and only one question: ${topic1}, ${topic2}, ${topic3}. The question should require some thought to answer and should, at minimum, take about 300 words to answer satisfactorily. 
+
+          Do not answer the question, instead let the user (me) answer the question, and give me a grade and feedback on how I can improve my answer in areas where it is unsatisfactory. Penalize extremely for answers that are not satisfactory *and* are also too short. If an answer is satisfactory but short, then that answer should not be penalized for its length. When I give you a response, give me a letter grade (including +/-) and give me feedback.
+          An (A) hits most, if not all, of the necessary features of a correct answer. (B) hits many necessary features of a correct answer. (C) hits some of the necessary features of a correct answer and provides. (D) hits hardly any features of a correct answer. (F) hits no features of a correct answer. By "features of a correct answer," I mean a robust explanation or statement.`,
         },
-        { role: 'user', content: `${int_answer}` },
+        { role: 'user', content: `Ask me a question` },
       ],
+    })
+  } else {
+    completion = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: transcript
     })
   }
   
 
-    //   transcript += `Interview Question: ${int_question}, Interviewees Response: ${int_answer}, Your Response to the Interviewee: ${completion.data.choices[0].message.content}`
+      // transcript += `Interview Question: ${int_question}, Interviewees Response: ${int_answer}, Your Response to the Interviewee: ${completion.data.choices[0].message.content}`
 
     // } else {
 
@@ -66,9 +62,11 @@ const runPrompt = async () => {
 
     // console.log(completion.data.choices[0].message);
     // console.log(completion.data)
-    console.log(completion.data.choices[0].message.content)
+    const gptResponse = completion.data.choices[0].message.content
+    console.log('GPT RESPONSE', gptResponse);
+    return gptResponse
+
+    const currentConversation = [{context: ""},{system: "", user: ""}, {system: "", user:""}]
   
  //console.log(transcript);
 }
-
-runPrompt()

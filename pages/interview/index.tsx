@@ -1,6 +1,8 @@
 import Button from '@/components/Button'
 import { BsPlayFill } from 'react-icons/bs'
 import { useRef } from 'react'
+import axios from 'axios'
+
 
 export default function Interview() {
   const topic1Ref = useRef<HTMLInputElement>(null)
@@ -14,16 +16,31 @@ export default function Interview() {
     console.log('Interview started')
     //Controll logic needed to ensure only one side is selected or have 2 different buttons
     //This can be saved for last since it's not a priority for demo purposes
-    console.log(companyRef.current?.value)
-    console.log(topic1Ref.current?.value)
-    console.log(topic2Ref.current?.value)
-    console.log(topic3Ref.current?.value)
+    // console.log(companyRef.current?.value)
+    // console.log(topic1Ref.current?.value)
+    // console.log(topic2Ref.current?.value)
+    // console.log(topic3Ref.current?.value)
+
+    axios.post('/api/gpt/interro-gpt', {
+      // {"topics": ["React", "CSS", "JavaScript"], "transcript": []}
+      topics: [
+        topic1Ref.current?.value,
+       topic2Ref.current?.value,
+        topic3Ref.current?.value,
+      ],
+      transcript: [],
+    }).then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err)
+    })
+
   }
 
   return (
     <div className='mx-auto w-[70%] max-w-7xl p-2 rounded-lg bg-white'>
       <p className='text-slate-800 text-center mb-4 text-xl'>
-        Build an interview
+        Build An Interview
       </p>
 
       <div className='flex flex-row justify-evenly'>
