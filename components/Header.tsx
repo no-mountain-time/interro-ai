@@ -50,20 +50,20 @@ export default function Header() {
                       <div className='hidden md:ml-6 md:flex md:space-x-8'>
                         <Link
                           href='/interview'
-                          className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                          className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700'
                         >
                           Start Interview
                         </Link>
                         <Link
                           href='/stats'
-                          className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                          className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700'
                         >
                           Performance
                         </Link>
                         {!session ? (
                           <Link
                             href='/login'
-                            className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                            className='inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-white hover:border-gray-300 hover:text-gray-700'
                           >
                             Sign in/Register
                           </Link>
@@ -81,16 +81,16 @@ export default function Header() {
 
           <Disclosure.Panel className='md:hidden'>
             <div className='space-y-1 pb-3 pt-2'>
-              <Disclosure.Button className='block border-l-4 hover:border-brand hover:bg-gray-100 py-2 pl-3 pr-4 text-base text-gray-600 font-medium w-[100%]'>
+              <Disclosure.Button className='block border-l-4 hover:border-brand hover:bg-gray-100 py-2 pl-3 pr-4 text-base text-white font-medium w-[100%]'>
                 <Link href='/interview'>Start Interview</Link>
               </Disclosure.Button>
-              <Disclosure.Button className='block border-l-4 hover:border-brand hover:bg-gray-100 py-2 pl-3 pr-4 text-base text-gray-600 font-medium w-[100%]'>
+              <Disclosure.Button className='block border-l-4 hover:border-brand hover:bg-gray-100 py-2 pl-3 pr-4 text-base text-white font-medium w-[100%]'>
                 <Link href='/stats'>Performance</Link>
               </Disclosure.Button>
-              <Disclosure.Button className='block border-l-4 hover:border-brand hover:bg-gray-100 py-2 pl-3 pr-4 text-base text-gray-600 font-medium w-[100%]'>
+              <Disclosure.Button className='block border-l-4 hover:border-brand hover:bg-gray-100 py-2 pl-3 pr-4 text-base text-white font-medium w-[100%]'>
                 <Link href='/'>SignIn/Register</Link>
               </Disclosure.Button>
-              <Disclosure.Button className='block border-l-4 hover:border-brand hover:bg-gray-100 py-2 pl-3 pr-4 text-base text-gray-600 font-medium w-[100%]'>
+              <Disclosure.Button className='block border-l-4 hover:border-brand hover:bg-gray-100 py-2 pl-3 pr-4 text-base text-white font-medium w-[100%]'>
                 <Link href='/'>Sign Out</Link>
               </Disclosure.Button>
             </div>

@@ -18,8 +18,8 @@ export default async function handler(
     let { transcript, topics, answer } = request.body
     console.log('transcript in req body', transcript)
     let gptOutput;
-    if (topics || topics.length === 0) {
-        console.log('NO TRANSCRIPT');
+    if (topics) {
+        console.log('TOPICS', topics);
         gptOutput = await runPrompt(transcript, topics);
     } else {
         console.log('TRANSCRIPT')

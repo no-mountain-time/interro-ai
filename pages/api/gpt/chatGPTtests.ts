@@ -19,7 +19,7 @@ export const runPrompt = async ( transcript: any, subjects?: any) => {
   let topic3 = subjects[2]
   console.log('is topics split?', topic1);
   let completion;
-  if (subjects) {
+  if (subjects.length > 0) {
     console.log('NO TRANSCRIPT GPT')
     completion = await openai.createChatCompletion({
       model: 'gpt-3.5-turbo',
