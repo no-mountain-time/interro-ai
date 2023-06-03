@@ -5,15 +5,25 @@ import Response from '@/components/Response'
 import Modal from '@/components/Modal'
 
 export default function Questions() {
+
+  const responseSubmit = (e: any) => {
+    e.preventDefault()
+    console.log('ResponseSubmitted')
+    // logic to handle response submission
+  }
+
   return (
     <>
-      <h1>Questions Start here:</h1>
-      <Progress />
       <div className='w-[60%] h-fit mx-auto rounded-lg bg-white mb-10 p-2 md:p-16'>
-        <p className='text-black'>Question</p>
         <Input />
         <Response />
-        <Button />
+        <div className='float-right mt-2'>
+          <Button
+            onClick={responseSubmit}
+          >
+            Submit
+          </Button>
+        </div>
       </div>
 
       {/* Modal when complete */}
